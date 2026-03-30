@@ -15,12 +15,18 @@
     <ol>
     {% for task in tasks %}
         <li>
-            {{ task }}
-            <form action="/delete/{{ loop.index0 }}" method="post" style="display:inline;">
-                <button type="submit">X</button>
-            </form>
+            {{ task.name }}
+            <a href="/tasks/{{ task.id }}/edit">Edit</a>
+            <button onclick="deleteTask({{ task.id }})">Delete</button>
         </li>
     {% endfor %}
     </ol>
+
+    <script>
+    function deleteTask(id) {
+        fetch("/tasks/" + id, { method: "DELETE" })
+            .then(() => location.reload());
+    }
+    </script>
 </body>
 </html>

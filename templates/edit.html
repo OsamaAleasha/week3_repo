@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Edit Task</h1>
+
+    <input type="text" id="task-name" value="{{ task.name }}">
+    <button onclick="updateTask({{ task.id }})">Update</button>
+    <a href="/">Cancel</a>
+
+    <script>
+    function updateTask(id) {
+        const newName = document.getElementById("task-name").value;
+        fetch("/tasks/" + id, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({name: newName})
+        }).then(() => window.location.href = "/");
+    }
+    </script>
+</body>
+</html>
