@@ -16,8 +16,10 @@
     {% for task in tasks %}
         <li>
             {{ task.name }}
-            <a href="/tasks/{{ task.id }}/edit">Edit</a>
-            <button onclick="deleteTask({{ task.id }})">Delete</button>
+            <div class="buttons">
+                <button class="edit" onclick="window.location.href='/tasks/{{ task.id }}/edit'">Edit</button>
+                <button onclick="deleteTask({{ task.id }})">Delete</button>
+            </div>
         </li>
     {% endfor %}
     </ol>

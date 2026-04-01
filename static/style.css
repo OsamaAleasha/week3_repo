@@ -20,8 +20,37 @@ button {
     cursor: pointer;
 }
 
+.buttons button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.buttons button:first-child {
+    background: #2196F3;
+}
+
+.buttons button:last-child {
+    background: #f44336; 
+}
+
+.buttons button:hover {
+    opacity: 0.8;
+}
+
+button.edit {
+    background: #f44336;
+}
+
+button.delete {
+    background: #f44336;
+}
+
 button:hover {
-    background: #45a049;
+    opacity: 0.8;
 }
 
 ol {
@@ -47,4 +76,18 @@ a {
 
 a:hover {
     color: darkred;
+}
+
+.edit-button {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #2196F3;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    opacity: 0.8;
 }
