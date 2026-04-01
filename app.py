@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
+#Edited
+from agent import summarize_chain, classify_chain, prioritize_chain
 
 app = Flask(__name__)
 
@@ -64,6 +66,17 @@ def update_task(task_id):
 
     
     return {"message": "Updated", "task": task}
+
+@app.route("/run", methods=["GET"])
+def run():
+    raw_input  = Task.query.order_by(Task.id).all()
+    tasks = [task.name for task in tasks]
+
+    summary    = summarize_chain.invoke({"input_text": tasks}).content
+    categories = classify_chain.invoke({"summary": summary}).content
+    priorities = prioritize_chain.invoke({"categories": categories}).content
+
+    return render_template("index.html", tasks=raw_input, summary = summary, categories = categories, priorities = priorities)
 
 
 if __name__ == "__main__":

@@ -12,6 +12,21 @@
         <button type="submit">Add</button>
     </form>
 
+    <form action="/run" method="get">
+        <button type="submit">AI Insights</button>
+    </form>
+    <hr>
+    <div>
+        summary: {{ summary }}
+        <br>
+        categories: {{ categories }}
+        <br>
+        priorities: {{ priorities }}
+        <br>
+    </div>
+    <hr>
+    
+
     <ol>
     {% for task in tasks %}
         <li>
