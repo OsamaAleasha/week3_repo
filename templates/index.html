@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>To-Do List</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <h1>To-Do List</h1>
@@ -23,16 +24,13 @@
         <p class="ai-summary">{{ ai_insight.summary }}</p>
         {% endif %}
         {% if ai_insight.order %}
-        <p class="ai-order"><strong>Suggested order:</strong> {{ ai_insight.order }}</p>
+        <p class="ai-order">Suggested order: {{ ai_insight.order }}</p>
         {% endif %}
-        <div class="insight-grid">
+        <ul class="insight-list">
             {% for insight in ai_insight.tasks %}
-            <article class="insight-card">
-                <span class="insight-task">{{ insight.task_name }}</span>
-                <span class="insight-priority priority-{{ insight.priority|lower }}">{{ insight.priority }}</span>
-            </article>
+            <li>{{ insight.task_name }} - {{ insight.priority }}</li>
             {% endfor %}
-        </div>
+        </ul>
     </section>
     {% endif %}
     <hr>
