@@ -16,7 +16,7 @@ class Task(db.Model):
 @app.route("/", methods=['GET'])
 def index():
     tasks = Task.query.order_by(Task.id).all()
-    return render_template("index.html", tasks=tasks)
+    return render_template("index.html", tasks=tasks, ai_insight=None)
 
 
 @app.route("/add", methods=['POST'])
@@ -64,6 +64,21 @@ def update_task(task_id):
 
     
     return {"message": "Updated", "task": task}
+
+@app.route("/tasks/AI", methods=['GET'])
+def AI_insights():
+    tasks = Task.query.order_by(Task.id).all()
+    if not tasks:
+        return "Tasks not found", 404
+    
+    
+    import agent
+    task_names = [task.name for task in tasks]
+    insights_from_ai = agent.insight_task(task_names)
+
+    
+    
+    return render_template("index.html", tasks=tasks, ai_insight=insights_from_ai)
 
 
 if __name__ == "__main__":

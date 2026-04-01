@@ -11,7 +11,31 @@
         <input type="text" name="task" placeholder="New task">
         <button type="submit">Add</button>
     </form>
-
+    <form action="/tasks/AI" method="get">
+        <button type="submit">
+            AI insights
+        </button>
+    </form>
+    {% if ai_insight %}
+    <section class="ai-insights">
+        <h2>AI Insights</h2>
+        {% if ai_insight.summary %}
+        <p class="ai-summary">{{ ai_insight.summary }}</p>
+        {% endif %}
+        {% if ai_insight.order %}
+        <p class="ai-order"><strong>Suggested order:</strong> {{ ai_insight.order }}</p>
+        {% endif %}
+        <div class="insight-grid">
+            {% for insight in ai_insight.tasks %}
+            <article class="insight-card">
+                <span class="insight-task">{{ insight.task_name }}</span>
+                <span class="insight-priority priority-{{ insight.priority|lower }}">{{ insight.priority }}</span>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    <hr>
     <ol>
     {% for task in tasks %}
         <li>
@@ -23,6 +47,8 @@
         </li>
     {% endfor %}
     </ol>
+
+
 
     <script>
     function deleteTask(id) {
