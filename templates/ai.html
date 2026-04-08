@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Task Planner</title>
+</head>
+<body>
+    <h1>AI Task Planner</h1>
+
+    <form method="POST">
+        <label for="tasks">Enter your tasks:</label><br><br>
+        <textarea name="tasks" rows="10" cols="60">{{ tasks }}</textarea><br><br>
+        <button type="submit">Generate Plan</button>
+    </form>
+
+    {% if summary %}
+        <h2>Original Task Input</h2>
+        <p>{{ tasks }}</p>
+
+        <h2>Summary</h2>
+        <p>{{ summary }}</p>
+
+        <h2>Categories</h2>
+        <p>{{ categories }}</p>
+
+        <h2>Priority</h2>
+        <p>{{ priority }}</p>
+    {% endif %}
+</body>
+</html>
