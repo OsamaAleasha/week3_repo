@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>AI Task Planner</title>
 </head>
 <body>
-    <h1>To-Do List</h1>
-
-    <form action="/add" method="post">
-        <input type="text" name="task" placeholder="New task">
-        <button type="submit">Add</button>
+    <h1>AI Task Planner</h1>
+    
+    <form method="POST">
+        <textarea name="tasks" rows="10" cols="50" placeholder="Enter your tasks here...">{{ original_tasks }}</textarea>
+        <br>
+        <button type="submit">Generate Plan</button>
     </form>
 
-    <ol>
-    {% for task in tasks %}
-        <li>
-            {{ task.name }}
-            <div class="buttons">
-                <button class="edit" onclick="window.location.href='/tasks/{{ task.id }}/edit'">Edit</button>
-                <button onclick="deleteTask({{ task.id }})">Delete</button>
-            </div>
-        </li>
-    {% endfor %}
-    </ol>
-
-    <script>
-    function deleteTask(id) {
-        fetch("/tasks/" + id, { method: "DELETE" })
-            .then(() => location.reload());
-    }
-    </script>
+    {% if result %}
+        <hr> <h2>Summary</h2>
+        <p>{{ result.summary }}</p>
+        
+        <h2>Categories</h2>
+        <p style="white-space: pre-wrap;">{{ result.categories }}</p>
+        
+        <h2>Priority</h2>
+        <p style="white-space: pre-wrap;">{{ result.priority }}</p>
+    {% endif %}
 </body>
 </html>
